@@ -7,6 +7,9 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    volumes:
+      - source: elasticsearch
+        target: /usr/share/elasticsearch/data
     configs:
       - source: elastic_config
         target: /usr/share/elasticsearch/config/elasticsearch.yml
@@ -56,8 +59,10 @@ services:
       mode: replicated
       replicas: 1
 
-configs:
+volumes:
+  elasticsearch:
 
+configs:
   elastic_config:
     file: ./elasticsearch/config/elasticsearch.yml
   logstash_config:
